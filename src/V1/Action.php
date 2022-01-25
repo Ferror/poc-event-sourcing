@@ -15,7 +15,7 @@ class Action extends Command
         private EventStore $eventStore,
     )
     {
-        parent::__construct('business');
+        parent::__construct('business:v1');
     }
 
     public function execute(InputInterface $input, OutputInterface $output): int
