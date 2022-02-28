@@ -13,7 +13,6 @@ class AggregateRepository
 
     public function load(string $aggregateId): Aggregate
     {
-//        dd($this->eventStore->all());
         $events = $this->eventStore->all($aggregateId);
         $aggregate = new Aggregate();
 
