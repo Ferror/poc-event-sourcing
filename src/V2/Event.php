@@ -32,7 +32,7 @@ abstract class Event implements JsonSerializable
             'name' => $this->name,
             'version' => $this->version,
             'aggregate_id' => $this->aggregateId,
-            'data' => json_encode($this->data),
+            'data' => json_encode($this->data, JSON_THROW_ON_ERROR),
         ];
     }
 }

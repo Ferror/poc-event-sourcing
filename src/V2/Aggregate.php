@@ -7,8 +7,9 @@ use App\V2\Event\AggregateChangedNameEvent;
 use App\V2\Event\AggregateCreatedEvent;
 use App\V2\Command\ChangeNameAggregateCommand;
 use App\V2\Command\CreateAggregateCommand;
+use JsonSerializable;
 
-class Aggregate
+class Aggregate implements JsonSerializable
 {
     private string $id;
     private string $name;
@@ -43,5 +44,13 @@ class Aggregate
         if ($event instanceof AggregateChangedNameEvent) {
             $this->name = $event->get('name')->toString();
         }
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+        ];
     }
 }

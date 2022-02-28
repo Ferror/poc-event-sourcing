@@ -7,7 +7,8 @@ class Parameter
 {
     public function __construct(
         private mixed $value,
-    ) {
+    )
+    {
     }
 
     public function get(string $name): self

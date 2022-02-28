@@ -43,14 +43,20 @@ class Action extends Command
             $this->eventStore->save($event);
         });
 
-        $table = new Table($output);
-        $table->setHeaders(['event', 'version', 'aggregate', 'data']);
+        $eventsTable = new Table($output);
+        $eventsTable->setHeaders(['event', 'version', 'aggregate', 'data']);
 
         foreach ($this->eventStore->all($id) as $event) {
-            $table->addRow($event->jsonSerialize());
+            $eventsTable->addRow($event->jsonSerialize());
         }
 
-        $table->render();
+        $eventsTable->render();
+
+        $aggregateStateTable = new Table($output);
+        $aggregateStateTable->setHeaders(['id', 'state']);
+        $aggregate = $this->aggregateRepository->load($id);
+        $aggregateStateTable->addRow($aggregate->jsonSerialize());
+        $aggregateStateTable->render();
 
         return Command::SUCCESS;
     }

@@ -13,7 +13,7 @@ class MemoryEventStore implements EventStore
 
     public function save(Event $event): void
     {
-        $this->memory[$event->getAggregateId()] = $event;
+        $this->memory[$event->getAggregateId()][] = $event;
     }
 
     public function all(string $id): array
